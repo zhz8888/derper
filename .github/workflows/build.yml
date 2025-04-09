@@ -48,16 +48,4 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/derper:latest
           build-args: |
             DERP_VERSION=${{ env.TAILSCALE_VERSION }}
-
-      - name: Build and push ip-only images
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile.ip
-          platforms: linux/amd64, linux/arm64
-          push: true
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/derper:${{ env.TAILSCALE_VERSION }}-ip
-            ${{ secrets.DOCKERHUB_USERNAME }}/derper:ip
-          build-args: |
-            DERP_VERSION=${{ env.TAILSCALE_VERSION }}
+            
