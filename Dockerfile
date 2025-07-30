@@ -12,6 +12,7 @@ WORKDIR /app
 
 RUN apk add --no-cache bash curl wget net-tools tar ca-certificates busybox-suid tzdata openssl
 RUN ln -sf /bin/busybox /usr/bin/crontab
+RUN mkdir /app/certs
 
 ENV TZ Asia/Shanghai
 ENV DERP_HOST your.hostname.com
@@ -24,7 +25,7 @@ ENV DERP_HTTP_PORT 80
 ENV DERP_VERIFY_CLIENTS false
 ENV DERP_VERIFY_CLIENT_URL ""
 
-COPY --from=builder /go/bin/derper .
+COPY --from=builder /go/bin/derper /app/derper
 
 CMD /app/derper --hostname=$DERP_HOST \
     --certmode=$DERP_CERT_MODE \
